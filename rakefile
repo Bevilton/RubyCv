@@ -1,0 +1,17 @@
+# rake -T
+# rake muni:show
+
+def method
+  puts 'method call'
+end
+
+namespace :muni do
+  desc 'Shows something'
+  task :show do
+    puts 'ahoj'
+  end
+  desc 'more'
+  task :show2 => :show do
+    method
+  end
+end

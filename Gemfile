@@ -10,3 +10,4 @@ gem "ruby-debug-ide" #Added
 gem 'sqlite3'
 gem 'rubocop'
 gem 'solargraph', group: :development
+gem 'rspec'

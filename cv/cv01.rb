@@ -33,10 +33,10 @@ def count_vowels_2(s)
 end
 
 def area_of_triangle(a, b, c)
-    return a*b/2
+    return a*b/2  
 end
 
-class Fibonacc
+class Fibonacci
     attr_accessor :prev_current
     attr_accessor :current
 

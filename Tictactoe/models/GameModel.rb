@@ -5,7 +5,7 @@ class GameModel
 
   def initialize(size = 15)
     @size = size
-    @board = Array.new(size){ Array.new(size) }
+    @board = Array.new(size) { Array.new(size) }
     @current_player = 1
     @date_time = Time.now
     @winning_count = 5

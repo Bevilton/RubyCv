@@ -8,36 +8,33 @@ class GameWinChecker
 
   def _row_win?(x, y, player_id, board)
     @winning_count.times do |i|
-      if (x + i) >= @size
-        return false
-      end
-      if board[y][x + i] != player_id
-        return false
-      end
+      return false if
+        (x + i) >= @size ||
+        board[y][x + i] != player_id
     end
     true
   end
 
-  def _diagonal_win?(x, y, player_id, board)
+  def _first_diagonal_win?(x, y, player_id, board)
     @winning_count.times do |i|
-      if (x + i) >= @size || (y + i) >= @size
-        return false
-      end
-      if board[y + i][x + i] != player_id
-        return false
-      end
+      return false if (x + i) >= @size || (y + i) >= @size
+      return false if board[y + i][x + i] != player_id
+    end
+    true
+  end
+
+  def _second_diagonal_win?(x, y, player_id, board)
+    @winning_count.times do |i|
+      return false if (x - i).negative? || (y + i) >= @size
+      return false if board[y + i][x - i] != player_id
     end
     true
   end
 
   def _column_win?(x, y, player_id, board)
     @winning_count.times do |i|
-      if (y + i) >= @size
-        return false
-      end
-      if board[y + i][x] != player_id
-        return false
-      end
+      return false if (y + i) >= @size
+      return false if board[y + i][x] != player_id
     end
     true
   end
@@ -45,7 +42,11 @@ class GameWinChecker
   def player_win?(player_id, board)
     board.each_with_index do |column, y|
       column.each_with_index do |_, x|
-        return true if _row_win?(x, y, player_id, board) || _column_win?(x, y, player_id, board) || _diagonal_win?(x, y, player_id, board)
+        return true if
+          _row_win?(x, y, player_id, board) ||
+          _column_win?(x, y, player_id, board) ||
+          _first_diagonal_win?(x, y, player_id, board) ||
+          _second_diagonal_win?(x, y, player_id, board)
       end
     end
     false

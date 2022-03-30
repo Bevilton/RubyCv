@@ -30,7 +30,7 @@ class DbAccessor
     record.json_board = game.board.to_json
     record.save
   end
-  
+
   def _map_record_to_model(record)
     game = GameModel.new
     game.current_player = record.current_player
@@ -39,7 +39,7 @@ class DbAccessor
     game.id = record.id
     game
   end
-  
+
   def load_game(id)
     record = GameRecord.find(id)
     _map_record_to_model(record)
@@ -48,7 +48,7 @@ class DbAccessor
   def get_games
     records = GameRecord.all
     games = []
-    records.each{|r| games.append(_map_record_to_model(r))}
+    records.each { |r| games.append(_map_record_to_model(r)) }
     games
   end
 

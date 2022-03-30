@@ -4,16 +4,16 @@ class InputParser
       puts 'Only two values separated by space are allowed.'
       return false
     end
-    if coords.all?{|x| x.match (/^[0-9]*$/)} == false
+    if coords.all?{ |x| x.match(/^[0-9]*$/) } == false
       puts 'Coordinates must be numbers.'
       return false
     end
-    if coords.all?{|x| x.to_i < 1 && x.to_i > 15}
+    if coords.all?{ |x| x.to_i < 1 && x.to_i > 15 }
       puts 'Coordinates must be greater or equal to 0 and smaller than 15.'
       return false
     end
 
-    int_coords = coords.map{ |x| a = x.to_i - 1}
+    int_coords = coords.map{ |x| x.to_i - 1}
     if !board[int_coords[0]][int_coords[1]].nil?
       puts 'This place is already full.'
       return false

@@ -7,13 +7,13 @@ class BoardPrinter
 
   def print_board(board)
     out = "\t|"
-    @size.times{ |i| out += (i + 1).to_s + "|" }
+    @size.times{ |i| out += (i + 1).to_s + '|' }
     puts out
     puts
 
     board.each_with_index do |x, i|
-      out = "|" + (i+1).to_s + "|\t|"
-      x.each_with_index do |y, j|
+      out = '|' + (i + 1).to_s + "|\t|"
+      x.each_ do |y|
         out += ' ' if y.nil?
         out += y.to_s unless y.nil?
         out += '|'

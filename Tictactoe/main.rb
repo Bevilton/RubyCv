@@ -20,7 +20,7 @@ def view_games
   loop do
     puts 'Current games:'
     games = accessor.get_games
-    games.each{|g| puts "Id: #{g.id}, started: #{g.date_time}"}
+    games.each{ |g| puts "Id: #{g.id}, started: #{g.date_time}" }
     puts <<-TEXT
       What do you want to do? 
       'b' for back
@@ -40,7 +40,7 @@ def view_games
       next
     end
 
-    if not values[1].match(/^[0-9]*$/)
+    unless values[1].match(/^[0-9]*$/)
       puts "Identifier must be a number but was #{values[1]}."
       next
     end
@@ -75,7 +75,7 @@ def main
     when '2'
       view_games
     when '3'
-      puts "Quitting..."
+      puts 'Quitting...'
       return
     else
       puts 'Wrong input!'

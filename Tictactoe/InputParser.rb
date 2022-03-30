@@ -23,7 +23,7 @@ class InputParser
   end
 
   def get_player_input(current_player, board)
-    puts "Player #{@current_player} is playing..."
+    puts "Player #{current_player} is playing..."
     puts "Where do you want to play? (type two coordinates like '11 2' or 'q' for going back to main menu or 's' for saving the game)."
     input = gets.strip
     while input != 'q' && input != 's' do

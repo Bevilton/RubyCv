@@ -4,19 +4,25 @@ require_relative './InputParser'
 require_relative './DbAccessor'
 require_relative './models/GameModel'
 
+SIZE = 15
 class Game
   attr_accessor :game, :win_checker, :input_parser, :board_printer, :db_accessor
 
-  def initialize(size = 15)
-    @game = GameModel.new(size)
-    @win_checker = GameWinChecker.new(@game.winning_count, size)
+  def initialize(game_model = nil)
+    @game = GameModel.new(SIZE)
+    unless game_model.nil?
+      @game.board = game_model.board
+      @game.current_player = game_model.current_player
+      @game.id = game_model.id
+    end
+    @win_checker = GameWinChecker.new(@game.winning_count, SIZE)
     @input_parser = InputParser.new
-    @board_printer = BoardPrinter.new(size)
+    @board_printer = BoardPrinter.new(SIZE)
     @db_accessor = DbAccessor.new
   end
 
   def _switch_player
-    @game.current_player > 1 ? @game.current_player == 2 : 1
+    @game.current_player = @game.current_player == 2 ? 1 : 2
   end
 
   def play

@@ -13,16 +13,18 @@ end
 
 class DbAccessor
   def save_game(game)
-    record_exists = GameRecord.where(id: game.id).exists?(conditions = :none)
+    record_exists = GameRecord.where(id: game.id).exists?
     if record_exists
       _update_game game
       return
     end
+    puts 'Saving new game.'
     record = GameRecord.new(time: game.date_time, current_player: game.current_player, json_board: game.board.to_json)
     record.save
   end
 
   def _update_game(game)
+    puts 'Updating game.'
     record = GameRecord.find(game.id)
     record.current_player = game.current_player
     record.json_board = game.board.to_json
@@ -40,7 +42,7 @@ class DbAccessor
   
   def load_game(id)
     record = GameRecord.find(id)
-    game = _map_record_to_model(record)
+    _map_record_to_model(record)
   end
 
   def get_games
@@ -54,16 +56,3 @@ class DbAccessor
     GameRecord.delete(id)
   end
 end
-
-# puts "Tables: #{ActiveRecord::Base.connection.tables}"
-
-# g = GameModel.new
-# g.board[2][1] = 1
-# g.id = 1
-
-# accessor = DbAccessor.new
-# games = accessor.get_games
-# puts games[1].board[0][0].nil?
-#accessor.save_game g
-#game = accessor.load_game(1)
-#accessor.delete_game(1)

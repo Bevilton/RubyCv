@@ -7,7 +7,12 @@ def start_game
   game.play
 end
 
-def load_game(game)
+def load_game(id)
+  accessor = DbAccessor.new
+  model = accessor.load_game(id)
+  puts 'Game loaded!'
+  game = Game.new(model)
+  game.play
 end
 
 def view_games

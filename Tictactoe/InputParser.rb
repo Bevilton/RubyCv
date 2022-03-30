@@ -33,7 +33,7 @@ class InputParser
 
       input = gets
     end
-    _save_game if input == 's'
+    return input if input == 's'
     puts 'Returning to main menu...'
     nil
   end

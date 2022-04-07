@@ -13,7 +13,7 @@ class BoardPrinter
 
     board.each_with_index do |x, i|
       out = '|' + (i + 1).to_s + "|\t|"
-      x.each_ do |y|
+      x.each do |y|
         out += ' ' if y.nil?
         out += y.to_s unless y.nil?
         out += '|'

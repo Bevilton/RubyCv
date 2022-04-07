@@ -31,7 +31,7 @@ class InputParser
       int_coords = _input_is_valid?(str_coords, board)
       return int_coords if int_coords
 
-      input = gets
+      input = gets.strip
     end
     return input if input == 's'
     puts 'Returning to main menu...'

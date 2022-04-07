@@ -9,10 +9,17 @@ end
 
 def load_game(id)
   accessor = DbAccessor.new
-  model = accessor.load_game(id)
-  puts 'Game loaded!'
-  game = Game.new(model)
-  game.play
+  begin
+    model = accessor.load_game(id)
+  rescue ActiveRecord::RecordNotFound
+    puts "Record with ID #{id} does not exist."
+    return false
+  else
+    puts 'Game loaded!'
+    game = Game.new(model)
+    game.play
+  end
+  return true
 end
 
 def view_games
@@ -46,8 +53,7 @@ def view_games
     end
 
     if values[0] == 'l'
-      load_game(values[1].to_i)
-      return
+      return if load_game(values[1].to_i)
     elsif values[0] == 'd'
       accessor.delete_game values[1].to_i
     else
